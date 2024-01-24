@@ -1,0 +1,17 @@
+CREATE TABLE pokemon (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    enName TEXT NOT NULL,
+    sprite TEXT,
+    genus TEXT NOT NULL,
+    description TEXT NOT NULL
+);
+
+getPaginated:
+SELECT * FROM pokemon ORDER BY id LIMIT :size OFFSET :start;
+
+getAll:
+SELECT * FROM pokemon ORDER BY id;
+
+insert:
+INSERT INTO pokemon VALUES ?;
