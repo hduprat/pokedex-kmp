@@ -1,12 +1,13 @@
 package ui.pokemonList
 
-import SafeAreaInsets
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -49,8 +50,13 @@ class PokemonListScreen : Screen {
 
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.fillMaxSize().background(backgroundBrush)
-                .padding(top = SafeAreaInsets.Top.dp)
+            modifier = Modifier.fillMaxSize().background(backgroundBrush).windowInsetsPadding(
+                    WindowInsets(
+                        top = WindowInsets.Companion.safeDrawing.getTop(
+                            LocalDensity.current
+                        )
+                    )
+                )
         ) {
             Text(
                 "Pokédex",

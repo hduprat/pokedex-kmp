@@ -1,12 +1,14 @@
 package ui.pokemonDetails
 
-import SafeAreaInsets
 import Sound
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
@@ -54,7 +56,8 @@ data class PokemonDetailsScreen(val pokemon: Pokemon) : Screen {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.fillMaxSize().background(backgroundBrush)
-                .padding(top = (SafeAreaInsets.Top + 12).dp).padding(horizontal = 4.dp)
+                .windowInsetsPadding(WindowInsets.safeDrawing).padding(top = 12.dp)
+                .padding(horizontal = 4.dp)
         ) {
             BackButton()
             NameSection(pokemon)
