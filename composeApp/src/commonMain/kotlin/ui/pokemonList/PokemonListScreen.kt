@@ -13,18 +13,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
+import ui.StripedBackground
 
 class PokemonListScreen : Screen {
 
@@ -33,30 +31,17 @@ class PokemonListScreen : Screen {
         val viewModel = getScreenModel<PokemonListViewModel>()
         val state by viewModel.state.collectAsState(initial = PokemonListState.Loading)
 
-        val tileSize = with(LocalDensity.current) {
-            10.dp.toPx()
-        }
-
-        val backgroundBrush = remember {
-            Brush.verticalGradient(
-                0.0f to Color(0xFF50735B),
-                0.5f to Color(0xFF50735B),
-                0.5f to Color(0xFF496244),
-                1.0f to Color(0xFF496244),
-                endY = tileSize,
-                tileMode = TileMode.Repeated
-            )
-        }
+        val backgroundBrush = StripedBackground(listOf(Color(0xFF50735B), Color(0xFF496244)), 10.dp)
 
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxSize().background(backgroundBrush).windowInsetsPadding(
-                    WindowInsets(
-                        top = WindowInsets.Companion.safeDrawing.getTop(
-                            LocalDensity.current
-                        )
+                WindowInsets(
+                    top = WindowInsets.Companion.safeDrawing.getTop(
+                        LocalDensity.current
                     )
                 )
+            )
         ) {
             Text(
                 "Pokédex",

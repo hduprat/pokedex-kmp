@@ -11,16 +11,13 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.TileMode
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import data.model.Pokemon
 import ui.BackButton
+import ui.StripedBackground
 
 val bgColor = Color(0xFF413B6D)
 val bgColorAlt = Color(0xFF5D5B9F)
@@ -33,20 +30,8 @@ data class PokemonDetailsScreen(val pokemon: Pokemon) : Screen {
 
     @Composable
     override fun Content() {
-        val tileSize = with(LocalDensity.current) {
-            10.dp.toPx()
-        }
+        val backgroundBrush = StripedBackground(listOf(bgColor, bgColorAlt), 10.dp)
 
-        val backgroundBrush = remember {
-            Brush.verticalGradient(
-                0.0f to bgColor,
-                0.5f to bgColor,
-                0.5f to bgColorAlt,
-                1.0f to bgColorAlt,
-                endY = tileSize,
-                tileMode = TileMode.Repeated
-            )
-        }
 
         DisposableEffect(cry) {
             cry.play()
